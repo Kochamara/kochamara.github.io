@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project</title>
+  <link href="src/output.css" rel="stylesheet" />
+</head>
+<body class="bg-white text-gray-900 font-sans leading-relaxed">
+
+  <div class="max-w-4xl mx-auto px-6 py-10">
+    <header class="mb-10">
+      <a href="index.html" class="inline-block text-blue-600 text-sm hover:underline">&larr; Back to Home</a>
+      <h1 id="project-title" class="text-4xl font-bold mt-4"></h1>
+      <p id="project-description" class="text-lg text-gray-600 mt-2 max-w-prose"></p>
+    </header>
+
+    <section id="media" class="space-y-8">
+      <!-- Media will be injected here -->
+    </section>
+  </div>
+
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get('project');
+    if (!slug) {
+      document.body.innerHTML = '<p class="p-6 text-red-500">No project specified.</p>';
+      throw new Error('Missing project slug');
+    }
+
+    const response = await fetch(`projects/${slug}.json`);
+    if (!response.ok) {
+      document.body.innerHTML = '<p class="p-6 text-red-500">Project not found.</p>';
+      throw new Error('Project JSON not found');
+    }
+
+    const project = await response.json();
+
+    document.title = `${project.title} — Kochamara Portfolio`;
+    document.getElementById('project-title').textContent = project.title;
+    document.getElementById('project-description').textContent = project.description;
+
+    const mediaContainer = document.getElementById('media');
+    for (const url of project.media || []) {
+      let el;
+      if (url.endsWith('.mp4')) {
+        el = document.createElement('video');
+        el.src = url;
+        el.controls = true;
+        el.className = 'w-full rounded-xl shadow-lg';
+      } else {
+        el = document.createElement('img');
+        el.src = url;
+        el.alt = project.title;
+        el.className = 'w-full rounded-xl shadow-md';
+      }
+      mediaContainer.appendChild(el);
+    }
+  </script>
+</body>
+</html>
