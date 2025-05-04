@@ -1,1 +1,20 @@
-["mcdonalds", "rainbows"]
+[
+    {
+        "slug": "mcdonalds",
+        "title": "title of mcdonalds",
+        "thumbnail": "/assets/mcdonalds/thumb.png",
+        "description": "lorem ipsum fadsjklfadsjkldsfajklfasd",
+        "media": [
+            "/assets/mcdonalds/art.mp4"
+        ]
+    },
+    {
+        "slug": "rainbows",
+        "title": "rainbows",
+        "thumbnail": "/assets/rainbows/thumb.jpg",
+        "description": "asfadsfadsfadsfdsfdsafas",
+        "media": [
+            "/assets/rainbows/spectrum.jpg"
+        ]
+    }
+]

@@ -21,41 +21,36 @@
   </div>
 
   <script type="module">
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('project');
-    if (!slug) {
-      document.body.innerHTML = '<p class="p-6 text-red-500">No project specified.</p>';
-      throw new Error('Missing project slug');
-    }
-
-    const response = await fetch(`projects/${slug}.json`);
-    if (!response.ok) {
+    const slug = new URLSearchParams(window.location.search).get("project");
+    const allProjects = await fetch("projects.json").then(res => res.json());
+    const project = allProjects.find(p => p.slug === slug);
+  
+    if (!project) {
       document.body.innerHTML = '<p class="p-6 text-red-500">Project not found.</p>';
-      throw new Error('Project JSON not found');
+      throw new Error("Missing project");
     }
-
-    const project = await response.json();
-
-    document.title = `${project.title} — Kochamara Portfolio`;
+  
+    document.title = `${project.title} — sguy`;
     document.getElementById('project-title').textContent = project.title;
     document.getElementById('project-description').textContent = project.description;
-
+  
     const mediaContainer = document.getElementById('media');
     for (const url of project.media || []) {
       let el;
-      if (url.endsWith('.mp4')) {
-        el = document.createElement('video');
+      if (url.endsWith(".mp4")) {
+        el = document.createElement("video");
         el.src = url;
         el.controls = true;
-        el.className = 'w-full rounded-xl shadow-lg';
+        el.className = "w-full rounded-xl shadow-lg";
       } else {
-        el = document.createElement('img');
+        el = document.createElement("img");
         el.src = url;
         el.alt = project.title;
-        el.className = 'w-full rounded-xl shadow-md';
+        el.className = "w-full rounded-xl shadow-md";
       }
       mediaContainer.appendChild(el);
     }
   </script>
+  
 </body>
 </html>
