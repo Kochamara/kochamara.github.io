@@ -7,18 +7,30 @@
   <link href="/src/output.css" rel="stylesheet">
   <title>spencer guy</title>
 </head>
-<body class="bg-white text-gray-900 font-sans leading-relaxed">
+<body class="relative min-h-screen overflow-x-hidden text-gray-900 bg-white">
 
-  <header class="border-b py-6 px-6 mb-10">
-    <div class="max-w-4xl mx-auto">
-      <h1 class="text-4xl font-bold">beep beep HONK</h1>
-      <p class="text-lg text-gray-500 mt-1">lorem ipsum is for lovers</p>
+  <video id="bgVideo" autoplay muted loop playsinline
+    class="absolute top-0 left-0 w-full h-full object-cover blur-md z-[-2]">
+    <source src="assets/background.mp4" type="video/mp4">
+    <source src="assets/background.webm" type="video/webm">
+  </video>
+
+  <div class="absolute inset-0 bg-white/50 backdrop-blur-md z-[-1]"></div>
+
+  <div class="relative z-10 flex flex-col justify-center items-center min-h-[60vh] text-center px-4">
+    <div class="backdrop-blur-xl bg-white/60 p-6 rounded-xl shadow-xl max-w-2xl text-gray-900">
+      <h1 class="text-5xl sm:text-7xl font-extrabold drop-shadow">
+HONK
+      </h1>
+      <p class="mt-4 text-lg sm:text-2xl">
+ahhhhhhhh!!!!!!!!!!!!!!!
+      </p>
     </div>
-  </header>
+  </div>
 
-  <main class="max-w-4xl mx-auto px-6">
-    <section id="project-list" class="grid grid-cols-1 md:grid-cols-2 gap-8"></section>
-  </main>
+  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Project cards will be injected here -->
+  </div>
 
   <footer class="py-10 text-center text-sm text-gray-400">
     footer
@@ -26,24 +38,30 @@
 
   <script type="module">
     const container = document.getElementById("project-list");
-  
+
     const projects = await fetch("projects.json").then(res => res.json());
-  
+
     for (const project of projects) {
       const el = document.createElement("a");
       el.href = `template.html?project=${project.slug}`;
-      el.className = "block border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition shadow-sm bg-white";
-  
+      el.className = "block rounded-2xl overflow-hidden bg-white/80 backdrop-blur-lg hover:shadow-xl transition-shadow shadow-md";
+
       el.innerHTML = `
         <img src="${project.thumbnail}" alt="${project.title}" class="w-full h-48 object-cover">
-        <div class="p-4">
-          <h2 class="text-xl font-semibold mb-1">${project.title}</h2>
-          <p class="text-gray-600 text-sm">${project.description}</p>
+        <div class="p-5">
+          <h2 class="text-xl font-semibold text-gray-900 mb-2">${project.title}</h2>
+          <p class="text-sm text-gray-700">${project.description}</p>
         </div>
       `;
-  
+
       container.appendChild(el);
     }
   </script>
+
+  <script>
+    const video = document.getElementById("bgVideo");
+    video.playbackRate = 0.05;
+  </script>
+
 </body>
 </html>
