@@ -9,7 +9,7 @@
         {
           "type": "video",
           "label": "Download",
-          "url": "/assets/2001/2001.mov"
+          "url": "https://spencerguy.net/2001.mov"
         },
         {
           "type": "youtube",
@@ -28,7 +28,7 @@
         {
           "type": "video",
           "label": "Download",
-          "url": "/assets/appleintelligence/appleintelligence.mov"
+          "url": "https://spencerguy.net/appleintelligence.mov"
         },
         {
           "type": "youtube",
@@ -47,7 +47,7 @@
         {
           "type": "video",
           "label": "Download",
-          "url": "/assets/breaddisease/breaddisease.mov"
+          "url": "https://spencerguy.net/breaddisease.mov"
         }
       ]
     },
@@ -61,7 +61,7 @@
         {
           "type": "video",
           "label": "Download",
-          "url": "/assets/demon/demon.mp4"
+          "url": "https://spencerguy.net/demon.mp4"
         }
       ]
     },
@@ -94,7 +94,7 @@
         {
           "type": "video",
           "label": "Download",
-          "url": "/assets/mcdonalds/mcdonalds.mov"
+          "url": "https://spencerguy.net/mcdonalds.mov"
         }
       ]
     },
