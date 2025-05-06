@@ -19,33 +19,32 @@
 
   <div class="relative z-10 flex flex-col justify-center items-center min-h-[60vh] text-center px-4">
     <div class="backdrop-blur-xl bg-white/60 p-6 rounded-xl shadow-xl max-w-2xl text-gray-900">
-      <h1 class="text-5xl sm:text-7xl font-extrabold drop-shadow">
-HONK
-      </h1>
-      <p class="mt-4 text-lg sm:text-2xl">
-ahhhhhhhh!!!!!!!!!!!!!!!
-      </p>
+      <h1 class="text-5xl sm:text-7xl font-extrabold drop-shadow">HONK</h1>
+      <p class="mt-4 text-lg sm:text-2xl">ahhhhhhhh!!!!!!!!!!!!!!!</p>
     </div>
   </div>
 
-  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    <!-- Project cards will be injected here -->
-  </div>
+  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
 
-  <footer class="py-10 text-center text-sm text-gray-400">
-    footer
-  </footer>
+  <footer class="py-10 text-center text-sm text-gray-400">footer</footer>
+
+  <div id="project-modal" class="fixed inset-0 z-50 bg-white/90 backdrop-blur-lg overflow-y-auto p-6 hidden">
+    <button id="modal-close" class="absolute top-4 right-6 text-gray-600 text-2xl">&times;</button>
+    <div id="modal-content" class="max-w-3xl mx-auto space-y-6"></div>
+  </div>
 
   <script type="module">
     const container = document.getElementById("project-list");
+    const modal = document.getElementById("project-modal");
+    const modalContent = document.getElementById("modal-content");
+    const closeBtn = document.getElementById("modal-close");
 
     const projects = await fetch("projects.json").then(res => res.json());
 
     for (const project of projects) {
       const el = document.createElement("a");
-      el.href = `template.html?project=${project.slug}`;
+      el.href = `#${project.slug}`;
       el.className = "block rounded-2xl overflow-hidden bg-white/80 backdrop-blur-lg hover:shadow-xl transition-shadow shadow-md";
-
       el.innerHTML = `
         <img src="${project.thumbnail}" alt="${project.title}" class="w-full h-48 object-cover">
         <div class="p-5">
@@ -53,8 +52,68 @@ ahhhhhhhh!!!!!!!!!!!!!!!
           <p class="text-sm text-gray-700">${project.description}</p>
         </div>
       `;
-
+      el.addEventListener("click", e => {
+        e.preventDefault();
+        openProjectModal(project.slug);
+      });
       container.appendChild(el);
+    }
+
+    function openProjectModal(slug) {
+      const project = projects.find(p => p.slug === slug);
+      if (!project) return;
+
+      history.pushState({ slug }, "", `#${slug}`);
+      renderModal(project);
+      modal.classList.remove("hidden");
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.add("hidden");
+      document.body.style.overflow = '';
+      history.pushState({}, "", "index.html");
+    }
+
+    function renderModal(project) {
+      document.title = project.title;
+      modalContent.innerHTML = `
+        <h2 class="text-3xl font-bold">${project.title}</h2>
+        <p class="text-gray-600">${project.description}</p>
+      `;
+
+      for (const asset of project.assets || []) {
+        let el;
+        if (asset.type === "youtube") {
+          const id = new URL(asset.url).searchParams.get("v");
+          el = document.createElement("iframe");
+          el.src = `https://www.youtube.com/embed/${id}`;
+          el.className = "w-full aspect-video rounded-xl shadow-lg";
+          el.allowFullscreen = true;
+          el.frameBorder = "0";
+        } else if (asset.type === "video") {
+          el = document.createElement("video");
+          el.src = asset.url;
+          el.controls = true;
+          el.className = "w-full rounded-xl shadow-lg";
+        } else if (asset.type === "image") {
+          el = document.createElement("img");
+          el.src = asset.url;
+          el.alt = asset.label || "";
+          el.className = "w-full rounded-xl shadow-md";
+        }
+        modalContent.appendChild(el);
+      }
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+    window.addEventListener("popstate", () => {
+      if (!location.hash) closeModal();
+    });
+
+    if (location.hash) {
+      const slug = location.hash.substring(1);
+      openProjectModal(slug);
     }
   </script>
 
