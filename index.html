@@ -82,6 +82,8 @@
         <p class="text-gray-600">${project.description}</p>
       `;
 
+      const hasYouTube = project.assets.some(a => a.type === "youtube");
+
       for (const asset of project.assets || []) {
         let el;
         if (asset.type === "youtube") {
@@ -91,18 +93,36 @@
           el.className = "w-full aspect-video rounded-xl shadow-lg";
           el.allowFullscreen = true;
           el.frameBorder = "0";
-        } else if (asset.type === "video") {
-          el = document.createElement("video");
-          el.src = asset.url;
-          el.controls = true;
-          el.className = "w-full rounded-xl shadow-lg";
         } else if (asset.type === "image") {
           el = document.createElement("img");
           el.src = asset.url;
           el.alt = asset.label || "";
           el.className = "w-full rounded-xl shadow-md";
         }
-        modalContent.appendChild(el);
+        if (el) modalContent.appendChild(el);
+      }
+
+      const lfsVideos = project.assets.filter(a => a.type === "video");
+      if (lfsVideos.length > 0) {
+        const list = document.createElement("ul");
+        list.className = "mt-6 space-y-2 text-blue-600 underline text-sm";
+
+        for (const asset of lfsVideos) {
+          const extension = asset.url.split('.').pop();
+          const link = document.createElement("a");
+          link.href = asset.url;
+          link.textContent = `download .${extension}`;
+          link.className = "hover:text-blue-800";
+          link.target = "_blank";
+          const item = document.createElement("li");
+          item.appendChild(link);
+          list.appendChild(item);
+        }
+
+        const section = document.createElement("div");
+        section.className = "pt-4 border-t border-gray-200";
+        section.appendChild(list);
+        modalContent.appendChild(section);
       }
     }
 
