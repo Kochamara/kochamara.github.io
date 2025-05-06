@@ -30,7 +30,7 @@
 
   <div id="project-modal" class="fixed inset-0 z-50 bg-white/90 backdrop-blur-lg overflow-y-auto p-6 hidden">
     <button id="modal-close" class="absolute top-4 right-6 text-gray-600 text-2xl">&times;</button>
-    <div id="modal-content" class="max-w-3xl mx-auto space-y-6"></div>
+    <div id="modal-content" class="max-w-full sm:max-w-3xl mx-auto space-y-6 p-4"></div>
   </div>
 
   <script type="module">
@@ -111,7 +111,7 @@
           const extension = asset.url.split('.').pop();
           const link = document.createElement("a");
           link.href = asset.url;
-          link.textContent = `download .${extension}`;
+          link.textContent = `⬇ download .${extension}`;
           link.className = "hover:text-blue-800";
           link.target = "_blank";
           const item = document.createElement("li");
@@ -129,6 +129,10 @@
     closeBtn.addEventListener("click", closeModal);
     window.addEventListener("popstate", () => {
       if (!location.hash) closeModal();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
     });
 
     if (location.hash) {
