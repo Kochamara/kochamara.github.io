@@ -1,0 +1,6 @@
+assets/2001/2001.mov filter=lfs diff=lfs merge=lfs -text
+assets/appleintelligence/appleintelligence.mov filter=lfs diff=lfs merge=lfs -text
+assets/breaddisease/breaddisease.mov filter=lfs diff=lfs merge=lfs -text
+assets/demon/demon.mp4 filter=lfs diff=lfs merge=lfs -text
+assets/firstdayinpikmin4/firstdayinpikmin4.mov filter=lfs diff=lfs merge=lfs -text
+assets/mcdonalds/mcdonalds.mov filter=lfs diff=lfs merge=lfs -text
