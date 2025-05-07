@@ -23,10 +23,12 @@
     <img src="assets/header.gif" alt="Header animation" class="w-[480px] h-[270px] object-contain">
   </div>
 
-  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 flex-grow"></div>
+  <div id="project-list"
+    class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 flex-grow"></div>
 
   <footer id="site-footer" class="relative z-10 mt-auto px-6 pb-10 flex justify-center">
-    <div class="px-5 py-3 bg-white/60 backdrop-blur-md shadow-2xl ring-1 ring-white/30 rounded-2xl text-sm text-gray-800 shadow-white/20">
+    <div
+      class="px-5 py-3 bg-white/60 backdrop-blur-md shadow-2xl ring-1 ring-white/30 rounded-2xl text-sm text-gray-800 shadow-white/20">
       <!-- Random string will be injected here -->
     </div>
   </footer>
@@ -73,7 +75,6 @@
     }
 
     function closeModal() {
-      // Pause all videos in modal
       modal.querySelectorAll("video").forEach(v => {
         v.pause();
         v.currentTime = 0;
@@ -83,15 +84,14 @@
       history.pushState({}, "", "index.html");
     }
 
-function renderModal(project) {
-  modalContent.innerHTML = `
-  <div class="flex items-center mb-4">
-    <a href="/" class="text-gray-600 hover:text-gray-800 mr-3 text-xl" aria-label="back">⤶</a>
-    <h2 class="text-3xl font-bold text-gray-900">${project.title}</h2>
-  </div>
-  <p class="text-gray-600 mb-6">${project.description}</p>
-`;
-
+    function renderModal(project) {
+      modalContent.innerHTML = `
+        <div class="flex items-center mb-4">
+          <a href="/" class="text-gray-600 hover:text-gray-800 mr-3 text-xl" aria-label="back">⤶</a>
+          <h2 class="text-3xl font-bold text-gray-900">${project.title}</h2>
+        </div>
+        <p class="text-gray-600 mb-6">${project.description}</p>
+      `;
 
       for (const asset of project.assets || []) {
         if (asset.type === "video") {
@@ -102,8 +102,22 @@ function renderModal(project) {
           if (asset.thumbnail) {
             video.setAttribute("poster", asset.thumbnail);
           }
-
           modalContent.appendChild(video);
+
+          const structuredData = {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": project.title,
+            "description": project.description,
+            "thumbnailUrl": project.thumbnail || asset.thumbnail,
+            "uploadDate": project.date,
+            "contentUrl": asset.url
+          };
+
+          const ldScript = document.createElement("script");
+          ldScript.type = "application/ld+json";
+          ldScript.textContent = JSON.stringify(structuredData);
+          modalContent.appendChild(ldScript);
 
           const wrapper = document.createElement("div");
           wrapper.className = "flex items-center gap-4 text-sm mt-2";
