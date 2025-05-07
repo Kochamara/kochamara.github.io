@@ -9,7 +9,7 @@
   <title>spencer guy</title>
 </head>
 
-<body class="relative min-h-screen overflow-x-hidden text-gray-900 bg-white">
+<body class="relative min-h-screen overflow-x-hidden text-gray-900 bg-white flex flex-col">
 
   <video id="bgVideo" autoplay muted loop playsinline
     class="absolute top-0 left-0 w-full h-full object-cover blur-md z-[-2]">
@@ -19,16 +19,18 @@
 
   <div class="absolute inset-0 bg-white/50 backdrop-blur z-[-1]"></div>
 
-  <div class="relative z-10 flex justify-center items-center min-h-[60vh] px-4">
+  <div class="relative z-10 flex justify-center items-center min-h-[40vh] px-4">
     <img src="assets/header.gif" alt="Header animation" class="w-[480px] h-[270px] object-contain">
   </div>
 
-
-  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-
-  <footer id="site-footer" class="text-center text-sm text-gray-500 mt-10">
-    <!-- Random string will be injected here -->
+  <div id="project-list" class="relative z-10 px-6 pb-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 flex-grow"></div>
+  <footer id="site-footer" class="relative z-10 mt-auto px-6 pb-10 flex justify-center">
+    <div class="px-5 py-3 bg-white/60 backdrop-blur-md shadow-2xl ring-1 ring-white/30 rounded-2xl text-sm text-gray-800 
+                shadow-white/20">
+      <!-- Random string will be injected here -->
+    </div>
   </footer>
+  
 
   <div id="project-modal" class="fixed inset-0 z-50 bg-white/90 backdrop-blur-lg overflow-y-auto p-6 hidden">
     <button id="modal-close" class="absolute top-4 right-6 text-gray-600 text-2xl">&times;</button>
@@ -161,7 +163,5 @@
       .catch(err => console.error('Could not load footer lines:', err));
   </script>
 
-
 </body>
-
 </html>
