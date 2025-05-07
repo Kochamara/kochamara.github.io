@@ -83,12 +83,15 @@
       history.pushState({}, "", "index.html");
     }
 
-    function renderModal(project) {
-      document.title = project.title;
-      modalContent.innerHTML = `
-        <h2 class="text-3xl font-bold">${project.title}</h2>
-        <p class="text-gray-600">${project.description}</p>
-      `;
+function renderModal(project) {
+  modalContent.innerHTML = `
+  <div class="flex items-center mb-4">
+    <a href="/" class="text-gray-600 hover:text-gray-800 mr-3 text-xl" aria-label="back">⤶</a>
+    <h2 class="text-3xl font-bold text-gray-900">${project.title}</h2>
+  </div>
+  <p class="text-gray-600 mb-6">${project.description}</p>
+`;
+
 
       for (const asset of project.assets || []) {
         if (asset.type === "video") {
