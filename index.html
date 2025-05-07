@@ -96,6 +96,10 @@
           video.src = asset.url;
           video.controls = true;
           video.className = "w-full rounded-xl shadow-lg";
+          if (asset.thumbnail) {
+            video.setAttribute("poster", asset.thumbnail);
+          }
+
           modalContent.appendChild(video);
 
           const wrapper = document.createElement("div");
