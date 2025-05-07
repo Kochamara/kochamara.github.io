@@ -88,18 +88,5 @@
         "url": "https://www.youtube.com/watch?v=X-ugO26I9kk"
       }
     ]
-  },
-  {
-    "slug": "rainbows",
-    "title": "rainbows",
-    "thumbnail": "/assets/rainbows/thumb.jpg",
-    "description": "placeholder",
-    "date": "2025-01-07",
-    "assets": [
-      {
-        "type": "image",
-        "url": "/assets/rainbows/spectrum.jpg"
-      }
-    ]
   }
 ]
