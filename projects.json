@@ -7,7 +7,11 @@
     "description": "Siri's always getting better!",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/appleintelligence/appleintelligence-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/appleintelligence.mov"
       },
       {
@@ -24,7 +28,11 @@
     "description": "🇺🇸 American Hamburger President",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/mcdonalds/mcdonalds-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/mcdonalds.mov"
       }
     ]
@@ -37,7 +45,11 @@
     "description": "🐶",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/demon/demon-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/demon.mp4"
       }
     ]
@@ -50,7 +62,11 @@
     "description": "volume warning // graphic content // viewer discretion advised",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/breaddisease/breaddisease-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/breaddisease.mov"
       }
     ]
@@ -63,7 +79,11 @@
     "description": "keep those Pikmin safe out there",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/firstdayinpikmin4/firstdayinpikmin4-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/firstdayinpikmin4.mov"
       },
       {
@@ -80,7 +100,11 @@
     "description": "",
     "assets": [
       {
-        "type": "video",
+        "type": "embed",
+        "url": "/assets/2001/2001-embed.mp4"
+      },
+      {
+        "type": "download",
         "url": "https://spencerguy.net/2001.mov"
       },
       {

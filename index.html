@@ -94,7 +94,7 @@
       `;
 
       for (const asset of project.assets || []) {
-        if (asset.type === "video") {
+        if (asset.type === "embed") {
           const video = document.createElement("video");
           video.src = asset.url;
           video.controls = true;
@@ -122,33 +122,18 @@
           const wrapper = document.createElement("div");
           wrapper.className = "flex items-center gap-4 text-sm mt-2";
 
-          if (asset.youtube) {
-            const ytLink = document.createElement("a");
-            ytLink.href = asset.youtube;
-            ytLink.textContent = "youtube";
-            ytLink.className = "text-blue-600 underline hover:text-blue-800";
-            ytLink.target = "_blank";
-            wrapper.appendChild(ytLink);
-          }
-
-          const extension = asset.url.split('.').pop();
-          const download = document.createElement("a");
-          download.href = asset.url;
-          download.textContent = `⬇ download .${extension}`;
-          download.className = "text-blue-600 underline hover:text-blue-800";
-          download.target = "_blank";
-          wrapper.appendChild(download);
-
           modalContent.appendChild(wrapper);
           continue;
         }
 
-        if (asset.type === "image") {
-          const img = document.createElement("img");
-          img.src = asset.url;
-          img.alt = asset.label || "";
-          img.className = "w-full rounded-xl shadow-md";
-          modalContent.appendChild(img);
+        if (asset.type === "download") {
+          const ext = asset.url.split('.').pop();
+          const link = document.createElement("a");
+          link.href = asset.url;
+          link.textContent = `⬇ download .${ext}`;
+          link.className = "text-blue-600 underline hover:text-blue-800 text-sm inline-block mt-2 mr-4";
+          link.target = "_blank";
+          modalContent.appendChild(link);
           continue;
         }
 
