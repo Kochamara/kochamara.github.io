@@ -99,9 +99,7 @@
           video.src = asset.url;
           video.controls = true;
           video.className = "w-full rounded-xl shadow-lg";
-          if (asset.thumbnail) {
-            video.setAttribute("poster", asset.thumbnail);
-          }
+          video.setAttribute("poster", project.thumbnail);
           modalContent.appendChild(video);
 
           const structuredData = {
@@ -109,7 +107,7 @@
             "@type": "VideoObject",
             "name": project.title,
             "description": project.description,
-            "thumbnailUrl": project.thumbnail || asset.thumbnail,
+            "thumbnailUrl": project.thumbnail,
             "uploadDate": project.date,
             "contentUrl": asset.url
           };
@@ -118,11 +116,6 @@
           ldScript.type = "application/ld+json";
           ldScript.textContent = JSON.stringify(structuredData);
           modalContent.appendChild(ldScript);
-
-          const wrapper = document.createElement("div");
-          wrapper.className = "flex items-center gap-4 text-sm mt-2";
-
-          modalContent.appendChild(wrapper);
           continue;
         }
 
@@ -182,4 +175,5 @@
   </script>
 
 </body>
+
 </html>
